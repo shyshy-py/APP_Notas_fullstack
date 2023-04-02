@@ -17,22 +17,29 @@
       </button>
 
       <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-4 mt-lg-0" >
-          <i class="fas fa-book fa-lg"> NotasApp</i>
+        <a class="navbar-brand mt-4 mt-lg-0">
+          <i style="color: rgb(98, 104, 189)" class="fas fa-book fa-lg">
+            NotasApp</i
+          >
         </a>
         <!-- Left links -->
-        <ul style="font-size:x-large" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul style="font-size: x-large" class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/"
-              ><a class="btn btn-dark nav-link text-white" >Inicio</a></router-link
+            <router-link to="/home"
+              ><a class="btn btn-dark nav-link text-white"
+                >Inicio</a
+              ></router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/notas"><a class="btn btn-dark nav-link text-white">Notas</a></router-link>
+            <router-link to="/notas"
+              ><a class="btn btn-dark nav-link text-white"
+                >Notas</a
+              ></router-link
+            >
           </li>
-          
         </ul>
         <!-- Left links -->
       </div>
