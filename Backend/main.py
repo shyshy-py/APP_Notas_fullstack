@@ -10,6 +10,8 @@ import mysql.connector
 app = FastAPI()
 
 
+app = FastAPI()
+
 origins = [
     "http://localhost",
     "http://localhost:8080",
@@ -26,10 +28,12 @@ security = HTTPBasic()
 
 
 mydb = mysql.connector.connect(
-    host="127.0.0.1",
+    #user=admin_bd
+    #password=admin123
+    host="db4free.net",
     port="3306",
-    user="root",
-    password="root",
+    user="admin_bd",
+    password="admin123",
     database="notas_bd"
 )
 mycursor = mydb.cursor()
@@ -46,7 +50,7 @@ class User(BaseModel):
 
 @app.post("/users/")
 async def create_user(user: User):
-    query = "INSERT INTO usuarios (username, password) VALUES (%s, %s)"
+    query = "INSERT INTO usuarios (users, password) VALUES (%s, %s)"
     values = (user.username, user.password)
     mycursor.execute(query, values)
     mydb.commit()
@@ -55,7 +59,7 @@ async def create_user(user: User):
 
 @app.post("/login")
 def login(credentials: HTTPBasicCredentials):
-    query = "SELECT id FROM usuarios WHERE username=%s AND password=%s"
+    query = "SELECT id FROM usuarios WHERE users=%s AND password=%s"
     values = (credentials.username, credentials.password)
     mycursor.execute(query, values)
     user = mycursor.fetchone()

@@ -1,6 +1,6 @@
 <template>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black text-white">
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
@@ -16,107 +16,37 @@
         <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-4 mt-lg-0">
-          <i style="color: rgb(98, 104, 189)" class="fas fa-book fa-lg">
-            NotasApp</i
-          >
+        <a class="navbar-brand mt-4 mt-lg-0 text-center">
+          <img class="nav-logo mx-auto" src="@/assets/logodark.png" alt="" />
         </a>
+      
         <!-- Left links -->
-        <ul style="font-size: x-large" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul style="font-size: x-large" class="navbar-nav me-auto mb-4 mb-lg-4">
           <li class="nav-item">
-            <router-link to="/home"
-              ><a class="btn btn-dark nav-link text-white"
-                >Inicio</a
-              ></router-link
-            >
+            <router-link to="/home">
+              <a class="btn btn-transparent nav-link text-white mr-4">Inicio</a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/notas"
-              ><a class="btn btn-dark nav-link text-white"
-                >Notas</a
-              ></router-link
-            >
+            <router-link to="/notas">
+              <a class="btn btn-transparent nav-link text-white mr-4">Tus Notas</a>
+            </router-link>
           </li>
         </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <a class="text-reset me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-
-        <!-- Notifications -->
-        <div class="dropdown">
-          <a
-            class="text-reset me-3 dropdown-toggle hidden-arrow"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger"
-              >1</span
-            >
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuLink"
-          >
-            <li>
-              <a class="dropdown-item" href="#">Some news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Avatar -->
-        <div class="dropdown">
-          <a
-            class="dropdown-toggle d-flex align-items-center hidden-arrow"
-            href="#"
-            id="navbarDropdownMenuAvatar"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              class="rounded-circle"
-              height="25"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
-            />
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuAvatar"
-          >
-            <li>
-              <a class="dropdown-item" href="#">My profile</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Settings</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Logout</a>
-            </li>
-          </ul>
+      
+        <!-- Right links -->
+        <div class="d-flex justify-content-end align-items-center">
+          <div class="order-last">
+            <button class="btn btn-sm btn-secondary ms-3">
+              <i class="fas fa-sign-out-alt fa-sm"></i>
+              Cerrar sesión
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Right elements -->
+      
     </div>
     <!-- Container wrapper -->
   </nav>

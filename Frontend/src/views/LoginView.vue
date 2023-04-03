@@ -1,103 +1,166 @@
 <template>
-    <div>
-      <br /><br /><br /><br />
-      <form @submit.prevent="login">
-        <div>
-          <label for="username">Nombre de usuario</label>
-          <input type="text" id="username" v-model="username" />
+  <div class="bg-login">
+    <img class="logo" src="@/assets/logodark.png" alt="" />
+    <div class="container cont-login" v-if="registro">
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-3 d-flex flex-column align-items-center">
+          <form @submit.prevent="log">
+            <div class="form-floating mb-4 mt-4">
+              <input
+                v-model="username"
+                type="text"
+                class="form-control input-form"
+                id="username"
+                placeholder="Ingresar usuario"
+              />
+              <label for="username" class="text-black">Ingresar usuario</label>
+            </div>
+            <p class="fade-in" v-if="error">
+              Usuario no encontrado. Intente nuevamente
+            </p>
+            <div class="form-floating mb-3">
+              <input
+                v-model="password"
+                type="password"
+                class="form-control input-form"
+                id="password"
+                placeholder="Ingresar contraseña"
+              />
+              <label for="password" class="text-black"
+                >Ingresar contraseña</label
+              >
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-black btn-effect">
+                Iniciar Sesión
+              </button>
+            </div>
+            <hr />
+            <p style="text-align: center">
+              No tienes cuenta?
+              <button
+                class="click-a"
+                @click="
+                  (registro = false),
+                    (error = false),
+                    (username = ''),
+                    (password = '')
+                "
+              >
+                Registrate
+              </button>
+            </p>
+          </form>
         </div>
-        <div>
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" v-model="password" />
-        </div>
-        <button type="submit">Iniciar sesión</button>
-      </form>
+      </div>
+      <br />
     </div>
-    <div>
-      <br /><br /><br /><br />
-      <form @submit.prevent="register">
-        <h1>registro</h1>
-        <div>
-          <label for="username">Nombre de usuario</label>
-          <input type="text" id="username" v-model="username" />
+    <div class="container cont-login" v-if="!registro">
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-3 d-flex flex-column align-items-center">
+          <form @submit.prevent="reg">
+            <div class="form-floating mb-4 mt-4">
+              <input
+                v-model="username"
+                type="text"
+                class="form-control input-form"
+                id="username"
+                placeholder="Ingresar usuario"
+              />
+              <label for="username" class="text-black">Ingresar usuario</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                v-model="password"
+                type="password"
+                class="form-control input-form"
+                id="password"
+                placeholder="Ingresar contraseña"
+              />
+              <label for="password" class="text-black"
+                >Ingresar contraseña</label
+              >
+            </div>
+            <p v-if="error">Contraseña no coincide</p>
+            <div class="form-floating mb-3">
+              <input
+                v-model="password2"
+                type="password"
+                class="form-control input-form"
+                id="password"
+                placeholder="Ingresar contraseña"
+              />
+              <label for="password" class="text-black"
+                >Confirmar contraseña</label
+              >
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-black btn-effect">
+                Registrate
+              </button>
+            </div>
+            <hr />
+            <p style="text-align: center">
+              No tienes cuenta?
+              <button
+                class="click-a"
+                @click="
+                  (registro = true),
+                    (username = ''),
+                    (password = ''),
+                    (password2 = ''),
+                    (error = false)
+                "
+              >
+                Registrate
+              </button>
+            </p>
+          </form>
         </div>
-        <div>
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" v-model="password" />
-        </div>
-        <button type="submit">Iniciar sesión</button>
-      </form>
+      </div>
+      <br />
     </div>
-  </template>
-  
-  <script lang="ts">
-  import router from "@/router";
-import { register } from "register-service-worker";
-  import { Options, Vue } from "vue-class-component";
-  import { Router } from "vue-router";
-  
-  @Options({
-    components: {
-      // aquí puedes declarar componentes que necesites
-    },
-  })
-  export default class LoginView extends Vue {
-    username = ''
-    password = ''
-  
-    async login() {
-      const url = 'http://localhost:8000/login';  
-      const credentials = {
-        username: this.username,
-        password: this.password
-      };
-  
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-      });
-  
-      if (!response.ok) {
-        const error = await response.json();
-        console.error('Error en la llamada a la API:', error);
-        throw new Error(error.detail);
-    }
-  
-      const data = await response.json();
-      const token = data.token;
-      console.log("Token:", token);
-      router.push('/home')
-      
-  
-      
-    }
+  </div>
+</template>
 
+<script lang="ts">
+import router from "@/router";
+import { Options, Vue } from "vue-class-component";
+import { login, register } from "@/services";
 
-    async register() {
-      const url = 'http://localhost:8000/users/';  
-      const credentials = {
-        username: this.username,
-        password: this.password
-      };
-  
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-      });
-  
-      if (!response.ok) {
-        const error = await response.json();
-        console.error('Error en la llamada a la API:', error);
-        throw new Error(error.detail);
-    }
-  
+@Options({
+  components: {
+    // aquí puedes declarar componentes que necesites
+  },
+})
+export default class LoginView extends Vue {
+  username = "";
+  password = "";
+  password2 = "";
+  error = false;
+  registro = true;
+
+  async reg() {
+    try {
+      if (this.password === this.password2) {
+        console.log("registro con exito");
+        await register(this.username, this.password);
+        router.push("/");
+      } else {
+        this.error = true;
+      }
+    } catch (error) {
+      // Manejar errores de registro
     }
   }
-  </script>
-  
+  async log() {
+    try {
+      await login(this.username, this.password);
+      console.log("login con exito");
+      router.push("/home");
+    } catch (error) {
+      console.log("error login" + error);
+    }
+  }
+}
+</script>

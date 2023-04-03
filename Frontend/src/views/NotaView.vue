@@ -177,14 +177,7 @@ export default class NotaView extends Vue {
   title='';
   text='';
 
-  async getData() {
-    const response = await fetch(
-      "https://airlane-api.onrender.com/flights/1/passengers"
-    );
-    const data = await response.json();
-    console.log(data);
-    return data;
-  }
+  
 
   selectedNote(user: any) {
     this.notaSelected = user;
