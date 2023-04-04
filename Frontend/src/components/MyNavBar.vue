@@ -26,12 +26,12 @@
         <ul style="font-size: x-large" class="navbar-nav me-auto mb-4 mb-lg-4">
           <li class="nav-item">
             <router-link to="/home">
-              <a class="btn btn-transparent nav-link text-white mr-4">Inicio</a>
+              <a class="btn btn-transparent btn-nav nav-link text-white mr-4">Inicio</a>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/notas">
-              <a class="btn btn-transparent nav-link text-white mr-4">Tus Notas</a>
+              <a class="btn btn-transparent btn-nav nav-link text-white mr-4">Tus Notas</a>
             </router-link>
           </li>
         </ul>

@@ -66,6 +66,11 @@
                 class="form-control input-form"
                 id="username"
                 placeholder="Ingresar usuario"
+                pattern="[A-Za-z0-9]+"
+                minlength="3"
+                maxlength="20"
+                oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g,'');"
+                required
               />
               <label for="username" class="text-black">Ingresar usuario</label>
             </div>
@@ -76,10 +81,10 @@
                 class="form-control input-form"
                 id="password"
                 placeholder="Ingresar contraseña"
+                minlength="6"
+                required
               />
-              <label for="password" class="text-black"
-                >Ingresar contraseña</label
-              >
+              <label for="password" class="text-black">Ingresar contraseña</label>
             </div>
             <p v-if="error">Contraseña no coincide</p>
             <div class="form-floating mb-3">
@@ -89,15 +94,13 @@
                 class="form-control input-form"
                 id="password"
                 placeholder="Ingresar contraseña"
+                minlength="6"
+                required
               />
-              <label for="password" class="text-black"
-                >Confirmar contraseña</label
-              >
+              <label for="password" class="text-black">Confirmar contraseña</label>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-black btn-effect">
-                Registrate
-              </button>
+              <button type="submit" class="btn btn-black btn-effect">Registrate</button>
             </div>
             <hr />
             <p style="text-align: center">
@@ -106,16 +109,17 @@
                 class="click-a"
                 @click="
                   (registro = true),
-                    (username = ''),
-                    (password = ''),
-                    (password2 = ''),
-                    (error = false)
+                  (username = ''),
+                  (password = ''),
+                  (password2 = ''),
+                  (error = false)
                 "
               >
                 Registrate
               </button>
             </p>
           </form>
+          
         </div>
       </div>
       <br />
@@ -143,8 +147,8 @@ export default class LoginView extends Vue {
   async reg() {
     try {
       if (this.password === this.password2) {
-        console.log("registro con exito");
         await register(this.username, this.password);
+        console.log("registro con exito");
         router.push("/");
       } else {
         this.error = true;

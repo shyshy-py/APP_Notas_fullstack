@@ -16,9 +16,11 @@
     "vue": "^3.2.13",
     "vue-carousel": "^0.18.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-color": "^2.8.1",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
+    "@types/vue-color": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
