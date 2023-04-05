@@ -1,4 +1,4 @@
-##Backend
+# Backend
 
 Esta es una API de Notas desarrollada con FastAPI que permite a los usuarios crear, leer, actualizar y eliminar notas.
 
@@ -9,7 +9,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu máquina:
 Python: Puedes descargarlo e instalarlo desde el sitio web oficial de Python (https://www.python.org/). Se recomienda usar Python 3.7 o superior.
 Pip: Pip es el gestor de paquetes de Python. Asegúrate de tenerlo instalado en tu máquina. Por lo general, viene instalado con Python 3.x, pero si no lo tienes, puedes instalarlo desde el sitio web oficial de Pip (https://pip.pypa.io/en/stable/installation/).
 
-# Requisitos
+## Requisitos
 
 - Python 3.7 o superior
 - MySQL 8.0 o superior
@@ -48,13 +48,13 @@ La API estará disponible en http://localhost:8000 en tu navegador o en tu clien
 
 
 
-##Frontend
+# Frontend
 Esta es una aplicacion desarrollada con Vue3 y Typescript
 
-#Requisitos previos
+## Requisitos previos
 Asegúrate de tener instalado Node.js y npm en tu sistema local.
 
-#Instalación 
+## Instalación 
 
 1.Clona este repositorio en tu máquina local
 
