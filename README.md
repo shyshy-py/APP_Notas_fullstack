@@ -19,8 +19,9 @@ Pip: Pip es el gestor de paquetes de Python. Asegúrate de tenerlo instalado en 
 1. Clona este repositorio en tu máquina local.
  
 2.Crea un entorno virtual y actívalo.
-python3 -m venv .venv
-En la carpeta raiz ejecuta:   .venv\Scripts\Activate.bat
+- python3 -m venv .venv
+En la carpeta raiz ejecuta:   
+- .venv\Scripts\Activate.bat
 
 
 3.Installa las dependencias
@@ -31,7 +32,7 @@ pip install -r requirements.txt
 Crea una base de datos MySQL en tu servidor local.
 Abre el archivo main.py y actualiza los siguientes parámetros en la función mysql.connector.connect() con la información de tu base de datos:
 
-mydb = mysql.connector.connect(
+- mydb = mysql.connector.connect(
     host="127.0.0.1",
     port="3306",
     user="root",
@@ -41,7 +42,7 @@ mydb = mysql.connector.connect(
 
 
 5.Ejecuta la aplicación.
-uvicorn main:app --reload
+- uvicorn main:app --reload
 
 La API estará disponible en http://localhost:8000 en tu navegador o en tu cliente de API.
 
@@ -59,10 +60,10 @@ Asegúrate de tener instalado Node.js y npm en tu sistema local.
 1.Clona este repositorio en tu máquina local
 
 2.Navega a la raíz del proyecto e instala las dependencias 
-npm install
+- npm install
  
 3.Luego, puedes ejecutar la aplicación en modo de desarrollo con el siguiente comando:
-npm run serve
+- npm run serve
 
 Esto iniciará el servidor de desarrollo y la aplicación estará disponible en tu navegador en la URL http://localhost:8080/
 
