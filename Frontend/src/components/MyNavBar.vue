@@ -42,7 +42,7 @@
             <router-link to="/login">
             <button  class="btn btn-sm btn-secondary ms-3">
               <i class="fas fa-sign-out-alt fa-sm"></i>
-              Cerrar sesión
+              Login
             </button>
             </router-link>
           </div>
