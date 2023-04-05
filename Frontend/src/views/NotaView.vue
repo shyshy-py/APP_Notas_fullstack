@@ -43,7 +43,7 @@
                     <div class="card-header">Nueva nota</div>
 
                     <div class="card-body">
-                      <form @submit.prevent="GuardarNota">
+                      <form @submit.prevent="GuardarNota()">
                         <div class="form-group">
                           <label for="titulo">Título:</label>
                           <input
@@ -211,7 +211,7 @@
 
                         <div class="form-group mt-4">
                           <button
-                            @click="GuardarNota"
+                            
                             type="submit"
                             class="btn btn-primary"
                           >
@@ -272,14 +272,14 @@ import MyNavBar from "@/components/MyNavBar.vue";
 export default class NotaView extends Vue {
   /*nota*/
 
+  date = new Date()
   titulo = "";
   texto = "";
-  hora = "";
-  fecha = "";
+  hora = this.date.toTimeString().slice(0, 8);
+  fecha = this.date.toDateString()
   likes = 0;
   color = "";
-  imagen = "";
-  idUser = localStorage.getItem("id");
+  idUser = localStorage.getItem('id');
 
   ColorNota() {
     const colorSeleccionado = (
@@ -290,10 +290,6 @@ export default class NotaView extends Vue {
   }
 
   async GuardarNota() {
-    let date = new Date();
-
-    this.hora = '15:30:00';
-    this.fecha = '2023-04-04';
 
     try {
       await createNote(
@@ -301,29 +297,19 @@ export default class NotaView extends Vue {
         this.texto,
         this.idUser,
         this.color,
-        this.imagen,
         this.likes,
         this.fecha,
         this.hora
       );
-      console.log(
-        this.titulo,
-        this.texto,
-        this.idUser,
-        this.color,
-        this.imagen,
-        this.likes,
-        this.fecha,
-        this.hora
-      );
-      console.log("nota guardada");
+
     } catch (error) {
       console.log("error f GuardarNota()", error);
     }
   }
 
   async MostrarNotasUsuario() {
-    await myNotes();
+    const id = localStorage.getItem('id')
+    await myNotes(id);
   }
 
   notaSelected: any = [];

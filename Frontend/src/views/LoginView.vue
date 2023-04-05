@@ -149,7 +149,7 @@ export default class LoginView extends Vue {
       if (this.password === this.password2) {
         await register(this.username, this.password);
         console.log("registro con exito");
-        router.push("/");
+        router.push("/home");
       } else {
         this.error = true;
       }

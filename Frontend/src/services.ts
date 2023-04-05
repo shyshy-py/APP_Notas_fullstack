@@ -22,6 +22,7 @@ async function login(user: any, pass: any) {
   const data = await response.json();
   const token = data.token;
   const id = data.id;
+
   localStorage.setItem("token", token);
   localStorage.setItem("id", id);
   console.log("Token:", token);
@@ -61,40 +62,48 @@ async function getNotes() {
   }
 }
 
-async function myNotes() {
+async function myNotes(id:any) {
+  const token = localStorage.getItem("token"); 
   const response = await fetch(
-    "http://localhost:8000/notas/" + localStorage.getItem("id")
+    "http://localhost:8000/notas/"+id,
+    
+  
   );
+  if (response.status === 401) {
+    throw new Error("No autenticado");
+  }
   const data = await response.json();
   console.log(data);
-  console.log("funciona myNotes");
-  return data;
+    return data;
 }
+
+
 
 async function createNote(
   titulo: any,
   texto: any,
   idUser: any,
   color: any,
-  imagen: any,
   likes: any,
   fecha: any,
   hora: any
 ) {
-  const response = await fetch("http://localhost:8000/notas", {
+  const response = await fetch("http://localhost:8000/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    
     body: JSON.stringify({
       titulo: titulo,
       texto: texto,
-      usuario_id: idUser,
-      color: color,
-      imagen: imagen,
-      likes: likes,
-      fecha: fecha,
       hora: hora,
+      fecha: fecha,
+      likes: likes,
+      color: color,
+      usuario_id: idUser,
+      
+      
     }),
   });
 
@@ -103,7 +112,7 @@ async function createNote(
     console.log("Nota guardada con éxito");
   } else {
     // la solicitud falló
-    console.error("Error service");
+    console.error("Error service createNote");
   }
 }
 
