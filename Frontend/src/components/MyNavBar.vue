@@ -39,10 +39,12 @@
         <!-- Right links -->
         <div class="d-flex justify-content-end align-items-center">
           <div class="order-last">
-            <button class="btn btn-sm btn-secondary ms-3">
+            <router-link to="/login">
+            <button  class="btn btn-sm btn-secondary ms-3">
               <i class="fas fa-sign-out-alt fa-sm"></i>
               Cerrar sesión
             </button>
+            </router-link>
           </div>
         </div>
       </div>

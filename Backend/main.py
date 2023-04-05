@@ -50,13 +50,13 @@ class User(BaseModel):
 
 
 class Note(BaseModel):
-    titulo: str
-    texto: str
-    hora: str
-    fecha: str
-    likes: int
-    color: str
-    usuario_id: str
+    titulo: str = ''
+    texto: str = ''
+    hora: str = ''
+    fecha: str = ''
+    likes: int = ''
+    color: str = ''
+    usuario_id: str = ''
 
 
 # Definir una clave secreta para cifrar el token
@@ -97,12 +97,10 @@ async def login(credentials: HTTPBasicCredentials):
     return response
 
 
-
-
 # Ruta protegida que requiere autenticación
 @app.get("/notas/{usuario_id}")
 async def get_notas_usuario(usuario_id: int):
-    if usuario_id==None:
+    if usuario_id == None:
         raise HTTPException(
             status_code=403, detail="No tiene acceso a esta ruta")
     query = "SELECT * FROM nota WHERE usuario_id = %s"
@@ -110,6 +108,7 @@ async def get_notas_usuario(usuario_id: int):
     mycursor.execute(query, values)
     response = mycursor.fetchall()
     return response
+
 
 @app.post("/like/{nota_id}")
 async def like_note(nota_id: int):
@@ -130,6 +129,7 @@ async def like_note(nota_id: int):
 
     return {"message": "Like agregado exitosamente"}
 
+
 @app.get("/all")
 async def get_notes():
     query = "select u.id,u.username,n.titulo,n.texto,n.hora,n.fecha,n.likes,n.color from nota n join usuarios u on n.usuario_id = u.id  "
@@ -142,10 +142,29 @@ async def get_notes():
 @app.post("/create")
 async def create_note(note: Note):
     query = "INSERT INTO nota (titulo, texto, hora, fecha, likes, color, usuario_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    values = (note.titulo, note.texto, note.hora, note.fecha, note.likes, note.color, note.usuario_id)
+    values = (note.titulo, note.texto, note.hora, note.fecha,
+              note.likes, note.color, note.usuario_id)
     mycursor.execute(query, values)
     mydb.commit()
     return {"message": "Nota creada exitosamente"}
+
+
+@app.delete("/delete/{nota_id}")
+async def delete_nota(nota_id: int):
+    query = "DELETE FROM nota WHERE id = %s"
+    values = (nota_id,)
+    mycursor.execute(query, values)
+    mydb.commit()
+    return {"message": f"Nota con ID {nota_id} eliminada exitosamente"}
+
+
+@app.put("/update/{nota_id}")
+async def update_nota(nota_id: int, nota: Note):
+    query = "UPDATE nota SET titulo = %s, texto = %s WHERE id = %s"
+    values = (nota.titulo, nota.texto, nota_id)
+    mycursor.execute(query, values)
+    mydb.commit()
+    return {"nota_id": nota_id, "mensaje": "Nota actualizada correctamente"}
 
 
 if __name__ == "__main__":

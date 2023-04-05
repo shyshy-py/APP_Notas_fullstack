@@ -73,6 +73,7 @@
                 required
               />
               <label for="username" class="text-black">Ingresar usuario</label>
+              <p>debes ingresar al menos una mayuscula y 1 numero</p>
             </div>
             <div class="form-floating mb-3">
               <input
@@ -149,7 +150,7 @@ export default class LoginView extends Vue {
       if (this.password === this.password2) {
         await register(this.username, this.password);
         console.log("registro con exito");
-        router.push("/home");
+        this.registro = true;
       } else {
         this.error = true;
       }

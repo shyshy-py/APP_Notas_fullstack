@@ -62,22 +62,15 @@ async function getNotes() {
   }
 }
 
-async function myNotes(id:any) {
-  const token = localStorage.getItem("token"); 
-  const response = await fetch(
-    "http://localhost:8000/notas/"+id,
-    
-  
-  );
+async function myNotes(id: any) {
+  const response = await fetch("http://localhost:8000/notas/" + id);
   if (response.status === 401) {
     throw new Error("No autenticado");
   }
   const data = await response.json();
   console.log(data);
-    return data;
+  return data;
 }
-
-
 
 async function createNote(
   titulo: any,
@@ -93,7 +86,7 @@ async function createNote(
     headers: {
       "Content-Type": "application/json",
     },
-    
+
     body: JSON.stringify({
       titulo: titulo,
       texto: texto,
@@ -102,8 +95,6 @@ async function createNote(
       likes: likes,
       color: color,
       usuario_id: idUser,
-      
-      
     }),
   });
 
@@ -116,4 +107,53 @@ async function createNote(
   }
 }
 
-export { login, register, getNotes, createNote, myNotes };
+async function deleteNote(id: any) {
+  try {
+    const response = await fetch(`http://localhost:8000/delete/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Error al eliminar la nota");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function updateNote(notaId: any, titulo: any, texto: any) {
+  const url = `http://localhost:8000/update/${notaId}`;
+  const credentials = {
+    titulo: titulo,
+    texto: texto,
+  };
+
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error en la llamada a la API:", error);
+    throw new Error(error.detail);
+  }
+
+  const data = await response.json();
+  console.log("Nota actualizada:", data);
+  return data;
+}
+
+export {
+  login,
+  register,
+  getNotes,
+  createNote,
+  myNotes,
+  deleteNote,
+  updateNote,
+};
