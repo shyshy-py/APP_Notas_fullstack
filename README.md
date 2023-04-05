@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 
 4.Configura la base de datos MySQL.
-Crea una base de datos MySQL en tu servidor local.
+Crea una base de datos MySQL en tu servidor local y ejecuta los scripts de la raiz del proyecto.
 Abre el archivo main.py y actualiza los siguientes parámetros en la función mysql.connector.connect() con la información de tu base de datos:
 
 - mydb = mysql.connector.connect(
